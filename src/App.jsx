@@ -1,68 +1,140 @@
-import { useState } from 'react'
-
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  // Email ki value store karega
+  const [email, setEmail] = useState("");
 
+  // Password ki value store karega
+  const [password, setPassword] = useState("");
+
+  // Remember me checkbox
+  const [rememberMe, setRememberMe] = useState(false);
+
+  // Sign in par chalega
   const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(email, password)
-  }
+    e.preventDefault();
+
+    console.log("Email:", email);
+    console.log("Password:", password);
+    console.log("Remember Me:", rememberMe);
+
+    alert(`Login successful for ${email}`);
+  };
+
   return (
-    <>
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <form
-          onsubmit={handleSubmit}
-          className="w-[420px]"
+    <div className="login-page">
+
+      <div className="login-container">
+
+        {/* Heading */}
+        <h1>Welcome back</h1>
+
+        <p className="subtitle">
+          Please enter your details
+        </p>
+
+        {/* Google Button */}
+        <button
+          type="button"
+          className="google-btn"
+          onClick={() => alert("Google Sign In")}
         >
-          <h1 className="text-2xl font-bold mb-4">Login</h1>
-          <p className="text-gray-600 mb-4"></p>
+          <span className="google-icon">G</span>
+          Sign in with Google
+        </button>
 
-          {/* Google Button */}
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            <span className="text-gray-600 font-bold">Google</span>
-            Signin with Google
-          </button>
+        {/* OR */}
+        <div className="divider">
+          <span></span>
+          <p>or</p>
+          <span></span>
+        </div>
 
-          <div>
-            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
+        <form onSubmit={handleSubmit}>
+
+          {/* Email */}
+          <div className="input-group">
+            <label htmlFor="email">
+              Email address
+            </label>
+
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              placeholder=""
+              required
             />
-            </label>
           </div>
 
-          <div>
-            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">
+          {/* Password */}
+          <div className="input-group">
+            <label htmlFor="password">
+              Password
+            </label>
+
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              placeholder=""
+              required
             />
-            </label>
           </div>
 
-          <div className="flex items-center justify-between">
+          {/* Remember + Forgot */}
+          <div className="options">
 
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Signin
+            <label className="remember">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+
+              <span>Remember for 30 days</span>
+            </label>
+
+            <button
+              type="button"
+              className="forgot-btn"
+              onClick={() => alert("Forgot password")}
+            >
+              Forgot password?
+            </button>
+
+          </div>
+
+          {/* Sign In */}
+          <button
+            type="submit"
+            className="signin-btn"
+          >
+            Sign in
           </button>
 
-          </div>
         </form>
+
+        {/* Sign Up */}
+        <p className="signup-text">
+          Don't have an account?
+
+          <button
+            type="button"
+            className="signup-btn"
+            onClick={() => alert("Sign up")}
+          >
+            Sign up
+          </button>
+        </p>
+
       </div>
-    </>
-  )
+
+    </div>
+  );
 }
 
-export default App
+export default App;
